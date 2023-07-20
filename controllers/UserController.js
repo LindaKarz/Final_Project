@@ -6,13 +6,13 @@ export const register = async (req, res) => {
   try {
    const password = req.body.password
    const salt = await bcrypt.genSalt(10)
-   const passwordHash = await bcrypt.hash(password, salt)
+   const hash = await bcrypt.hash(password, salt)
  
    const doc = new UserModel({
      email: req.body.email,
      name: req.body.name,
      avatarUrl: req.body.avatarUrl,
-     passwordHash
+     passwordHash: hash
    })
  
    const user = await doc.save()
@@ -20,9 +20,11 @@ export const register = async (req, res) => {
    const token = jwt.sign({
      _id: user._id
    }, 'secret123', {expiresIn: '30d'})
+
+   const { passwordHash, ...userData } = user._doc
  
    res.json({
-     ...user._doc,
+     ...userData,
      token
    })
   } catch (err) {
@@ -55,8 +57,10 @@ export const login = async (req, res) => {
       _id: user._id
     }, 'secret123', {expiresIn: '30d'})
 
+    const { passwordHash, ...userData } = user._doc
+
     res.json({
-      ...user._doc,
+      ...userData,
       token
     })
 
@@ -77,6 +81,8 @@ export const getMe = async (req, res) => {
         message: 'User is not found'
       })
     }
+
+    const { passwordHash, ...userData } = user._doc
 
     res.json(userData)
   } catch (err) {

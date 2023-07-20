@@ -1,4 +1,4 @@
-import { CollectionModel } from '../models/Collection.js'
+import CollectionModel from '../models/Collection.js'
 
 export const getAll = async (req, res)=> {
   try {
