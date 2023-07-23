@@ -2,12 +2,13 @@ import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 import {Card, Button, Row, Col, Container} from 'react-bootstrap'
-import axios from '../axios.js'
 import { fetchCollections } from '../redux/slices/collections.js'
+import { Link } from 'react-router-dom'
+
 
 const Home = () => {
   const dispatch = useDispatch()
-  const {collections, tags} = useSelector(state => state.collections)
+  const { collections } = useSelector(state => state.collections)
 
   const isCollectionsLoading = collections.status === 'loading'
 
@@ -20,7 +21,7 @@ const Home = () => {
 
   return (
   <>
-  <Container>
+  <Container className='mt-5'>
     <Row xs={1} md={3} className="g-4">
       {(isCollectionsLoading ? [...Array(6)] : collections.items).map(( obj, index) => 
       isCollectionsLoading ? (
@@ -30,15 +31,18 @@ const Home = () => {
       ) : (
         <Col key={index}>
           <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src="holder.js/100px180" />
-            <Card.Body>
-              <Card.Title>Card Title</Card.Title>
-              <Card.Text>
-                Some quick example text to build on the card title and make up the
-                bulk of the card's content.
-              </Card.Text>
-              <Button variant="primary">Go somewhere</Button>
-            </Card.Body>
+            <Link to={`/collections/${obj._id}`}>
+              <Card.Img variant="top" src={obj.image} />
+              <Card.Body>
+                <Card.Title>{obj.title}</Card.Title>
+                <Card.Text>
+                  {obj.description}
+                </Card.Text>
+              </Card.Body>
+            </Link>
+            <Card.Footer>
+              <Button variant="outline-secondary" style={{borderRadius: '30px'}} size='sm'>{obj.topic}</Button>
+            </Card.Footer>
           </Card>
         </Col>
       ))}

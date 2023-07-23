@@ -18,7 +18,7 @@ const CollectionSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  imageUrl: String
+  image: String
 },
 {
   timestamps: true

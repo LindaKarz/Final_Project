@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { useNavigate, Navigate } from 'react-router-dom'
+import { useNavigate, Navigate, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { Container, Form, Button, Row, Col } from 'react-bootstrap'
@@ -85,7 +85,6 @@ const Create = () => {
   }
 
 
-
   if (!window.localStorage.getItem('token') && !isAuth) {
     return <Navigate to='/'/>
   }
@@ -123,14 +122,14 @@ const Create = () => {
 
         <Form.Select className='mb-4' value={topic} onChange={changeTopic}>
           <option disabled>Topic</option>
-          <option value="1">Books</option>
-          <option value="2">Music</option>
-          <option value="3">Movies</option>
-          <option value="4">Comics</option>
-          <option value="5">Pictures</option>
-          <option value="6">Toys</option>
-          <option value="7">Flowers</option>
-          <option value="8">Other</option>
+          <option value="Books">Books</option>
+          <option value="Music">Music</option>
+          <option value="Movies">Movies</option>
+          <option value="Comics">Comics</option>
+          <option value="Pictures">Pictures</option>
+          <option value="Toys">Toys</option>
+          <option value="Flowers">Flowers</option>
+          <option value="Other">Other</option>
         </Form.Select>
 
         <Form.Group>
@@ -166,7 +165,11 @@ const Create = () => {
 
 
         <Button className='m-2' variant='outline-dark' type='submit' onClick={onSubmit}>Create</Button>
+        
+        <Link to='/'>
         <Button variant='dark'>Cancel</Button>
+        </Link>
+        
 
       </Form>
     </Container>

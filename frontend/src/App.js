@@ -12,6 +12,7 @@ import CreateCollection from './pages/CreateCollection.jsx'
 import { Container } from '@mui/material'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { fetchAuthMe, selectIsAuth } from './redux/slices/auth.js'
+import { CollectionPage } from './pages/CollectionPage.jsx'
 
 function App() {
   const dispatch = useDispatch()
@@ -30,6 +31,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/collections/create" element={<CreateCollection />} />
+          <Route path="/collections/:id" element={<CollectionPage />} />
         </Routes>
      </Container>
     </>

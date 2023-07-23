@@ -5,7 +5,7 @@ export const Collection = ({
   _id,
   title,
   createdAt,
-  imageUrl,
+  image,
   user,
   viewsCount,
   commentsCount,
@@ -22,7 +22,7 @@ export const Collection = ({
   return (
     <>
       <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={imageUrl} alt={title}/>
+        <Card.Img variant="top" src={image} alt={title}/>
         <Card.Body>
           <Card.Title>{title}</Card.Title>
           <Card.Text>

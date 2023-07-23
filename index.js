@@ -42,10 +42,10 @@ app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
 })
 
 app.get('/collections', getAll)
-app.get('/collections:id', getOne)
+app.get('/collections/:id', getOne)
 app.post('/collections', checkAuth, collectionCreateValidation, handleValidationErrors, create)
-app.delete('/collections:id', checkAuth, remove)
-app.patch('/collections:id', checkAuth, collectionCreateValidation, handleValidationErrors, update)
+app.delete('/collections/:id', checkAuth, remove)
+app.patch('/collections/:id', checkAuth, collectionCreateValidation, handleValidationErrors, update)
 
 app.listen(4444, (err) => {
   if(err) {

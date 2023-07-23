@@ -3,7 +3,6 @@ import CollectionModel from '../models/Collection.js'
 export const getAll = async (req, res)=> {
   try {
     const collections = await CollectionModel.find().populate('user').exec()
-
     res.json(collections)
   } catch (err) {
     console.log(err)
@@ -13,10 +12,12 @@ export const getAll = async (req, res)=> {
   }
 }
 
-export const getOne = async (req, res)=> {
+export const getOne = async (req, res) => {
   try {
     const collectionId = req.params.id
-    CollectionModel.findOne({
+
+    CollectionModel.findOne(
+      {
       _id: collectionId
       },
       (err, doc) => {
@@ -35,11 +36,11 @@ export const getOne = async (req, res)=> {
 
         res.json(doc)
       }
-    )
+    ).populate('user')
   } catch (err) {
     console.log(err)
     res.status(500).json({
-      message: 'Failed to find collection'
+      message: 'Failed to find collectionR'
     })
   }
 }
@@ -82,7 +83,7 @@ export const create = async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       topic: req.body.topic,
-      imageUrl: req.body.imageUrl,
+      image: req.body.image,
       user: req.userId,
     })
     const collection = await doc.save()
@@ -106,7 +107,7 @@ export const update = async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       topic: req.body.topic,
-      imageUrl: req.body.imageUrl,
+      image: req.body.image,
       user: req.userId,
     })
 

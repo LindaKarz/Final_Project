@@ -3,6 +3,7 @@ import axios from '../../axios.js'
 
 export const fetchCollections = createAsyncThunk('collections/fetchCollections', async () => {
   const {data} = await axios.get('/collections')
+  console.log(data)
   return data
 })
 

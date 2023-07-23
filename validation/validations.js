@@ -16,5 +16,5 @@ export const collectionCreateValidation = [
   body('title', 'Enter collection title').isLength({min: 1}).isString(),
   body('description', 'Enter collection description').optional().isString(),
   body('topic', 'Select collection topic').isLength({min: 1}).isString(),
-  body('imageUrl').optional().isString(),
+  body('image').optional().isString(),
 ]
